@@ -19,9 +19,20 @@ import java.util.List;
 public class AdminPageServlet extends HttpServlet {
     private static final long serialVersionUID = 4709581287874012817L;
 
+    private FactoryDAO factoryDAO = FactoryDAO.getInstance();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            UserDAO userDAO = factoryDAO.getUserDAO();
+            List<User> users = userDAO.getAll();
+            request.setAttribute("users", users);
+        } catch (ExceptionDAO exceptionDAO) {
+            exceptionDAO.printStackTrace();
+        }
+        request.getRequestDispatcher("/adminPage.jsp").forward(request, response);
     }
 }

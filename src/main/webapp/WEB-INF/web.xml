@@ -23,7 +23,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminPageServlet</servlet-name>
-        <url-pattern>/page</url-pattern>
+        <url-pattern>/admin-page</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -32,7 +32,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCreateServlet</servlet-name>
-        <url-pattern>/create</url-pattern>
+        <url-pattern>/admin-create</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -41,7 +41,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminEditServlet</servlet-name>
-        <url-pattern>/edit</url-pattern>
+        <url-pattern>/admin-edit</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -50,6 +50,24 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminDeleteServlet</servlet-name>
-        <url-pattern>/delete</url-pattern>
+        <url-pattern>/admin-delete</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ModeratorPageServlet</servlet-name>
+        <servlet-class>com.gmail.andreyzarazka.servlets.moderator.ModeratorPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModeratorPageServlet</servlet-name>
+        <url-pattern>/moderator/page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ModeratorEditServlet</servlet-name>
+        <servlet-class>com.gmail.andreyzarazka.servlets.moderator.ModeratorEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModeratorEditServlet</servlet-name>
+        <url-pattern>/moderator/edit</url-pattern>
     </servlet-mapping>
 </web-app>

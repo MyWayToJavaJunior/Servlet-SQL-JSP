@@ -31,9 +31,9 @@ public class AdminLogInServlet extends HttpServlet {
         if (userBD == null) {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (role == 1) {
-            response.sendRedirect("/adminPage.jsp");
+            response.sendRedirect("/admin-page");
         } else if (role == 2) {
-            response.sendRedirect("/moderator/moderatorPage.jsp");
+            response.sendRedirect("/moderator/page");
         }
     }
 
