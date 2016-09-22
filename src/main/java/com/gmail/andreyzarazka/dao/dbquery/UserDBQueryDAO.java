@@ -24,7 +24,7 @@ public class UserDBQueryDAO implements UserDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "SELECT id, login, password, first_name, last_name, age FROM meloman_db.users;";
+            String sql = "SELECT id, login, password, first_name, last_name, age FROM meloman_db.users";
             connection = factoryDAO.getConnection();
             log.trace("Open Connection");
             statement = connection.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class UserDBQueryDAO implements UserDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "SELECT * FROM meloman_db.users;";
+            String sql = "SELECT * FROM meloman_db.users";
             connection = factoryDAO.getConnection();
             log.trace("Open Connection");
             statement = connection.prepareStatement(sql);
@@ -146,7 +146,7 @@ public class UserDBQueryDAO implements UserDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "SELECT id, login, password, first_name, last_name, age FROM meloman_db.users where id = ?";
+            String sql = "SELECT id, login, password, first_name, last_name, age FROM meloman_db.users WHERE id = ?";
             connection = factoryDAO.getConnection();
             log.trace("Open Connection");
             statement = connection.prepareStatement(sql);
@@ -203,7 +203,7 @@ public class UserDBQueryDAO implements UserDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "SELECT * FROM meloman_db.users where id = ?";
+            String sql = "SELECT * FROM meloman_db.users WHERE id = ?";
             connection = factoryDAO.getConnection();
             log.trace("Open Connection");
             statement = connection.prepareStatement(sql);
@@ -265,7 +265,7 @@ public class UserDBQueryDAO implements UserDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "INSERT INTO meloman_db.users (`login`, `password`, `first_name`, `last_name`, `age`, `role_id`) VALUES (?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO meloman_db.users (`login`, `password`, `first_name`, `last_name`, `age`, `role_id`) VALUES (?, ?, ?, ?, ?, ?)";
             connection = factoryDAO.getConnection();
             log.trace("Open Connection");
             statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -420,7 +420,7 @@ public class UserDBQueryDAO implements UserDAO {
 
         for (MusicType musicType : musicTypes) {
             try {
-                String sql = "INSERT INTO meloman_db.users_has_music_type VALUES (?, ?);";
+                String sql = "INSERT INTO meloman_db.users_has_music_type VALUES (?, ?)";
                 connection = factoryDAO.getConnection();
                 log.trace("Open Connection");
                 statement = connection.prepareStatement(sql);

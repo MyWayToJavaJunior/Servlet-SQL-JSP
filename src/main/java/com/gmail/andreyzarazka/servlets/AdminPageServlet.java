@@ -2,6 +2,8 @@ package com.gmail.andreyzarazka.servlets;
 
 import com.gmail.andreyzarazka.dao.ExceptionDAO;
 import com.gmail.andreyzarazka.dao.FactoryDAO;
+import com.gmail.andreyzarazka.dao.UserDAO;
+import com.gmail.andreyzarazka.dao.dbquery.UserDBQueryDAO;
 import com.gmail.andreyzarazka.domain.User;
 
 import javax.servlet.RequestDispatcher;
@@ -13,24 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminViewServlet", urlPatterns = "/view")
-public class AdminViewServlet extends HttpServlet {
+@WebServlet("/AdminPageServlet")
+public class AdminPageServlet extends HttpServlet {
     private static final long serialVersionUID = 4709581287874012817L;
 
-    private FactoryDAO factoryDAO = FactoryDAO.getInstance();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            List<User> users = factoryDAO.getUserDAO().getAll();
-            request.setAttribute("users", users);
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/adminPage.jsp");
-            dispatcher.forward(request, response);
-        } catch (ExceptionDAO exceptionDAO) {
-            exceptionDAO.printStackTrace();
-        }
     }
 }
