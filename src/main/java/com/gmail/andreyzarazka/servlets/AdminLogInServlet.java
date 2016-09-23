@@ -19,7 +19,7 @@ public class AdminLogInServlet extends HttpServlet {
     private static final long serialVersionUID = 2548391078153765170L;
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
-    private int role;
+    private int role = 0;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userBD = null;
@@ -29,11 +29,13 @@ public class AdminLogInServlet extends HttpServlet {
             userBD = searchUser(login, password);
         }
         if (userBD == null) {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else if (role == 1) {
             response.sendRedirect("/admin-page");
         } else if (role == 2) {
-            response.sendRedirect("/moderator/page");
+            response.sendRedirect("/admin-page");
+        } else {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
@@ -59,6 +61,7 @@ public class AdminLogInServlet extends HttpServlet {
                     firstName = resultSet.getString(4);
                     role = resultSet.getInt(7);
                 }
+                System.out.println(role);
             }
         } catch (SQLException | ExceptionDAO e) {
             e.printStackTrace();

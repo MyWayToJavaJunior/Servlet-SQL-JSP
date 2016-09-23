@@ -1,12 +1,12 @@
 package com.gmail.andreyzarazka.servlets;
 
+import com.gmail.andreyzarazka.dao.AddressDAO;
 import com.gmail.andreyzarazka.dao.ExceptionDAO;
 import com.gmail.andreyzarazka.dao.FactoryDAO;
 import com.gmail.andreyzarazka.dao.UserDAO;
-import com.gmail.andreyzarazka.dao.dbquery.UserDBQueryDAO;
+import com.gmail.andreyzarazka.domain.Address;
 import com.gmail.andreyzarazka.domain.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,9 +30,13 @@ public class AdminPageServlet extends HttpServlet {
             UserDAO userDAO = factoryDAO.getUserDAO();
             List<User> users = userDAO.getAll();
             request.setAttribute("users", users);
+
+            AddressDAO addressDAO = factoryDAO.getAddressDAO();
+            List<Address> addresses = addressDAO.getAll();
+            request.setAttribute("addresses", addresses);
         } catch (ExceptionDAO exceptionDAO) {
             exceptionDAO.printStackTrace();
         }
-        request.getRequestDispatcher("/adminPage.jsp").forward(request, response);
+        request.getRequestDispatcher("pages/index.jsp").forward(request, response);
     }
 }
