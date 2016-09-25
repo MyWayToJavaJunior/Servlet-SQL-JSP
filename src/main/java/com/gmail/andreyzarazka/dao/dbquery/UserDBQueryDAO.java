@@ -99,11 +99,10 @@ public class UserDBQueryDAO implements UserDAO {
                 String lastName = resultSet.getString(5);
                 int age = resultSet.getInt(6);
                 int roleId = resultSet.getInt(7);
-                int addressId = resultSet.getInt(8);
 
-                fullUser = new User(id, login, password, firstName, lastName, age, roleId, addressId);
+                fullUser = new User(id, login, password, firstName, lastName, age, roleId);
                 fullUser.setRole(factoryDAO.getRoleDAO().getById(roleId));
-                fullUser.setAddress(factoryDAO.getAddressDAO().getById(addressId));
+                fullUser.setAddress(factoryDAO.getAddressDAO().getById(id));
                 fullUser.setMusicTypes(getUsersHasMusicType(id));
                 fullUsers.add(fullUser);
             }
@@ -219,11 +218,10 @@ public class UserDBQueryDAO implements UserDAO {
                 String lastName = resultSet.getString(5);
                 int age = resultSet.getInt(6);
                 int roleId = resultSet.getInt(7);
-                int addressId = resultSet.getInt(8);
 
-                fullUser = new User(id, login, password, firstName, lastName, age, roleId, addressId);
+                fullUser = new User(id, login, password, firstName, lastName, age, roleId);
                 fullUser.setRole(factoryDAO.getRoleDAO().getById(roleId));
-                fullUser.setAddress(factoryDAO.getAddressDAO().getById(addressId));
+                fullUser.setAddress(factoryDAO.getAddressDAO().getById(id));
                 fullUser.setMusicTypes(getUsersHasMusicType(id));
             }
         } catch (SQLException e) {
@@ -276,7 +274,6 @@ public class UserDBQueryDAO implements UserDAO {
             statement.setString(4, user.getLastName());
             statement.setInt(5, user.getAge());
             statement.setInt(6, user.getRoleId());
-            statement.setInt(7, user.getAddressId());
             statement.executeUpdate();
 
             resultSet = statement.getGeneratedKeys();
@@ -289,7 +286,7 @@ public class UserDBQueryDAO implements UserDAO {
             address.setId(userId);
             factoryDAO.getAddressDAO().createAddress(address, user.getId());
 
-            if (user.getMusicTypes() == null) {
+            if (user.getMusicTypes() != null) {
                 createUsersHasMusicType(user.getMusicTypes(), user.getId());
             }
         } catch (SQLException e) {
@@ -329,8 +326,9 @@ public class UserDBQueryDAO implements UserDAO {
         boolean current = false;
         Connection connection = null;
         PreparedStatement statement = null;
+        int id = user.getId();
         try {
-            String sql = "UPDATE meloman_db.users SET login = ?, password = ?, first_name = ?, last_name = ?, age = ?, role_id = ? WHERE id = ?";
+            String sql = "UPDATE meloman_db.users SET login = ?, password = ?, first_name = ?, last_name = ?, age = ?, role_id = ? WHERE id = `" + id + "`";
             connection = factoryDAO.getConnection();
             log.trace("Open Connection");
             statement = connection.prepareStatement(sql);
@@ -420,7 +418,7 @@ public class UserDBQueryDAO implements UserDAO {
 
         for (MusicType musicType : musicTypes) {
             try {
-                String sql = "INSERT INTO meloman_db.users_has_music_type VALUES (?, ?)";
+                String sql = "INSERT INTO meloman_db.users_has_music_type (`users_id`, `music_type_id`) VALUES (?, ?)";
                 connection = factoryDAO.getConnection();
                 log.trace("Open Connection");
                 statement = connection.prepareStatement(sql);
@@ -515,8 +513,8 @@ public class UserDBQueryDAO implements UserDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error("\n", e);
-            throw new ExceptionDAO("", e);
+            log.error("Cannot delete UsersHasMusicType\n", e);
+            throw new ExceptionDAO("Cannot delete UsersHasMusicType", e);
         } finally {
             try {
                 if (statement != null) {

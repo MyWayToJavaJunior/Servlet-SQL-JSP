@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@WebServlet(name = "AdminLogInServlet")
 public class AdminLogInServlet extends HttpServlet {
     private static final long serialVersionUID = 2548391078153765170L;
 
@@ -27,13 +26,16 @@ public class AdminLogInServlet extends HttpServlet {
             String login = request.getParameter("login");
             String password = request.getParameter("password");
             userBD = searchUser(login, password);
-        }
-        if (userBD == null) {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else if (role == 1) {
-            response.sendRedirect("/admin-page");
-        } else if (role == 2) {
-            response.sendRedirect("/admin-page");
+
+            if (userBD == null) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else if (role == 1) {
+                response.sendRedirect("/admin-page");
+            } else if (role == 2) {
+                response.sendRedirect("/admin-page");
+            } else if (role == 3) {
+                response.sendRedirect("/meloman");
+            }
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -61,7 +63,6 @@ public class AdminLogInServlet extends HttpServlet {
                     firstName = resultSet.getString(4);
                     role = resultSet.getInt(7);
                 }
-                System.out.println(role);
             }
         } catch (SQLException | ExceptionDAO e) {
             e.printStackTrace();

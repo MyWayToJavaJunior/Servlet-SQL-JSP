@@ -60,7 +60,7 @@
                         <a href="/admin-page"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="/pages/tables.jsp"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <a href="/pages/controlPanel.jsp"><i class="fa fa-table fa-fw"></i> Tables</a>
                     </li>
                 </ul>
             </div>

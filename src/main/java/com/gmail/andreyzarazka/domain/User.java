@@ -14,7 +14,6 @@ public class User extends Model {
     private Address address;
     private List<MusicType> musicTypes;
     private int roleId;
-    private int addressId;
 
     public User() {
     }
@@ -28,24 +27,22 @@ public class User extends Model {
         this.age = age;
     }
 
-    public User(String login, String password, String firstName, String lastName, int age, int roleId, int addressId) {
+    public User(String login, String password, String firstName, String lastName, int age, int roleId) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.addressId = addressId;
         this.roleId = roleId;
     }
 
-    public User(int id, String login, String password, String firstName, String lastName, int age, int roleId, int addressId) {
+    public User(int id, String login, String password, String firstName, String lastName, int age, int roleId) {
         super(id);
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.addressId = addressId;
         this.roleId = roleId;
     }
 
@@ -128,17 +125,6 @@ public class User extends Model {
 
     public void setMusicTypes(List<MusicType> musicTypes) {
         this.musicTypes = musicTypes;
-    }
-
-    public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int addressId) {
-        if (addressId <= 0) {
-            throw new IllegalArgumentException();
-        }
-        this.addressId = addressId;
     }
 
     public int getRoleId() {

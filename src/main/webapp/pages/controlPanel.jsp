@@ -17,14 +17,15 @@
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-    <!-- Morris Charts CSS -->
-    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +38,7 @@
 <body>
 
 <div id="wrapper">
+
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -46,16 +48,14 @@
 
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <c:out value="${user.firstName}" default="Unknown" escapeXml="true"/>
-                admin
+                <c:out value="${user.firstName}" default="Unknown" escapeXml="true"/> admin
             </li>
-            <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="/pages/login.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="/pages/login.jsp"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -83,88 +83,27 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">INFO</h1>
+                <h1 class="page-header">Control panel</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-users" aria-hidden="true"></i> User Information
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover"
-                               id="information-users">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Age</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="user" items="${users}">
-                                <tr class="odd gradeX">
-                                    <td>${user.id}</td>
-                                    <td>${user.login}</td>
-                                    <td>${user.password}</td>
-                                    <td>${user.firstName}</td>
-                                    <td>${user.lastName}</td>
-                                    <td class="text-center">${user.age}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-8 -->
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-envelope" aria-hidden="true"></i> User Address
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover"
-                               id="information-address">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Country</th>
-                                <th>Street</th>
-                                <th>ZIP code</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="address" items="${addresses}">
-                                <tr class="odd gradeX">
-                                    <td>${address.id}</td>
-                                    <td>${address.country}</td>
-                                    <td>${address.street}</td>
-                                    <td class="text-center">${address.zipCode}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-6 -->
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-users" aria-hidden="true"></i> Full information about the users
+                        <ul class="nav navbar-top-links navbar-right center-block">
+                            <li>
+                                <form action="/admin-create" method="GET">
+                                    <button type="submit" class="btn btn-success btn-xs center-block"
+                                            title="Create user"><i class="fa fa-user-plus"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <!-- /.dropdown -->
+                        </ul>
+                        <!-- /.navbar-top-links -->
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -183,6 +122,8 @@
                                 <th>Street</th>
                                 <th>ZIP Code</th>
                                 <th>Music Type</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -203,6 +144,22 @@
                                             ${musicType.musicTypeName}
                                         </c:forEach>
                                     </td>
+                                    <form action="/admin-edit" method="GET">
+                                        <td class="text-center">
+                                            <button type="submit" title="Edit user" class="btn btn-primary btn-xs"
+                                                    name="${user.getId()}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </button>
+                                        </td>
+                                    </form>
+                                    <form action="/admin-delete" method="GET">
+                                        <td class="text-center">
+                                            <button type="submit" title="Delete user" class="btn btn-danger btn-xs"
+                                                    name="${user.getId()}">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </td>
+                                    </form>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -217,7 +174,6 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
-
 </div>
 <!-- /#wrapper -->
 
@@ -227,40 +183,13 @@
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-<!-- Morris Charts JavaScript -->
-<script src="../vendor/raphael/raphael.min.js"></script>
-<script src="../vendor/morrisjs/morris.min.js"></script>
-<script src="../data/morris-data.js"></script>
-<!-- Flot Charts JavaScript -->
-<script src="../vendor/flot/excanvas.min.js"></script>
-<script src="../vendor/flot/jquery.flot.js"></script>
-<script src="../vendor/flot/jquery.flot.pie.js"></script>
-<script src="../vendor/flot/jquery.flot.resize.js"></script>
-<script src="../vendor/flot/jquery.flot.time.js"></script>
-<script src="../vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-<script src="../data/flot-data.js"></script>
 <!-- DataTables JavaScript -->
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#information-users').DataTable({
-            responsive: true
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        $('#information-address').DataTable({
-            responsive: true
-        });
-    });
-</script>
-
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function () {
         $('#dataTables-example').DataTable({

@@ -19,11 +19,20 @@
 
     <servlet>
         <servlet-name>AdminPageServlet</servlet-name>
-        <servlet-class>com.gmail.andreyzarazka.servlets.AdminPageServlet</servlet-class>
+        <servlet-class>com.gmail.andreyzarazka.servlets.AdminStartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminPageServlet</servlet-name>
         <url-pattern>/admin-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminControlPanelServlet</servlet-name>
+        <servlet-class>com.gmail.andreyzarazka.servlets.AdminControlPanelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminControlPanelServlet</servlet-name>
+        <url-pattern>/admin-panel</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -69,5 +78,14 @@
     <servlet-mapping>
         <servlet-name>ModeratorEditServlet</servlet-name>
         <url-pattern>/moderator/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserViewServlet</servlet-name>
+        <servlet-class>com.gmail.andreyzarazka.servlets.user.UserViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserViewServlet</servlet-name>
+        <url-pattern>/meloman</url-pattern>
     </servlet-mapping>
 </web-app>

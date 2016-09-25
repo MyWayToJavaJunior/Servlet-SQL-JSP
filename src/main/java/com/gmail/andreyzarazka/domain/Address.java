@@ -35,9 +35,8 @@ public class Address extends Model {
     }
 
     public void setZipCode(int zipCode) {
-        int minLength = 5;
-        int maxLength = 7;
-        if (zipCode <= minLength && zipCode >= maxLength) {
+        int lengthZipCode = 6;
+        if (zipCode == lengthZipCode) {
             throw new IllegalArgumentException();
         }
         this.zipCode = zipCode;

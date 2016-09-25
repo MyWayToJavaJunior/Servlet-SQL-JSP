@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 
@@ -42,8 +42,7 @@
                                 <input class="form-control" placeholder="Username" name="login" type="text" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password"
-                                       value="">
+                                <input class="form-control" placeholder="Password" name="password" type="password">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-lg btn-success btn-block" name="logInBtn">Login
