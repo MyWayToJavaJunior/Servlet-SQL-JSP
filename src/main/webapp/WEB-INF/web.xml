@@ -7,7 +7,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
     <display-name>Archetype Created Web Application</display-name>
-    
+
     <servlet>
         <servlet-name>AdminLogInServlet</servlet-name>
         <servlet-class>com.gmail.andreyzarazka.servlets.AdminLogInServlet</servlet-class>
@@ -61,14 +61,23 @@
         <servlet-name>AdminDeleteServlet</servlet-name>
         <url-pattern>/admin-delete</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>ModeratorPageServlet</servlet-name>
         <servlet-class>com.gmail.andreyzarazka.servlets.moderator.ModeratorPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ModeratorPageServlet</servlet-name>
-        <url-pattern>/moderator/page</url-pattern>
+        <url-pattern>/moderator-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ModeratorPanelServlet</servlet-name>
+        <servlet-class>com.gmail.andreyzarazka.servlets.moderator.ModeratorPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModeratorPanelServlet</servlet-name>
+        <url-pattern>/moderator-panel</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -77,7 +86,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ModeratorEditServlet</servlet-name>
-        <url-pattern>/moderator/edit</url-pattern>
+        <url-pattern>/moderator-edit</url-pattern>
     </servlet-mapping>
 
     <servlet>

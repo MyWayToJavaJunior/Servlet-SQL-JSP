@@ -5,6 +5,7 @@ import com.gmail.andreyzarazka.domain.Address;
 import com.gmail.andreyzarazka.domain.MusicType;
 import com.gmail.andreyzarazka.domain.Role;
 import com.gmail.andreyzarazka.domain.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AdminEditServlet extends HttpServlet {
-
     private static final long serialVersionUID = -582494122275711814L;
+    private static Logger log = Logger.getLogger(AdminEditServlet.class.getName());
+
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
     private int id;
@@ -53,8 +55,8 @@ public class AdminEditServlet extends HttpServlet {
             List<MusicType> setMusicTypes = null;
             try {
                 setMusicTypes = factoryDAO.getMusicTypeDAO().getAll();
-            } catch (ExceptionDAO exceptionDAO) {
-                exceptionDAO.printStackTrace();
+            } catch (ExceptionDAO e) {
+                log.error("Cannot read list musics", e);
             }
             Iterator<MusicType> iterator = setMusicTypes.iterator();
             while (iterator.hasNext()) {
@@ -71,10 +73,10 @@ public class AdminEditServlet extends HttpServlet {
             UserDAO userDAO = factoryDAO.getUserDAO();
             user.setId(id);
             userDAO.update(user);
-            response.sendRedirect("/admin-panel");
-        } catch (ExceptionDAO exceptionDAO) {
-            exceptionDAO.printStackTrace();
+        } catch (ExceptionDAO e) {
+            log.error("Cannot udate user", e);
         }
+        response.sendRedirect("/admin-panel");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -94,11 +96,10 @@ public class AdminEditServlet extends HttpServlet {
             request.setAttribute("roles", rolesUtils.getAll());
             request.setAttribute("musicTypesUser", user.getMusicTypes());
             request.setAttribute("musicTypes", musicTypes);
-
-            request.getRequestDispatcher("pages/adminEdit.jsp").forward(request, response);
-        } catch (ExceptionDAO exceptionDAO) {
-            exceptionDAO.printStackTrace();
+        } catch (ExceptionDAO e) {
+            log.error("Cannot read", e);
         }
+        request.getRequestDispatcher("pages/adminEdit.jsp").forward(request, response);
     }
 
     private boolean searchMusicType(String[] musicTypes, MusicType musicType) {

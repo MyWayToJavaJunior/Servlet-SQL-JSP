@@ -2,6 +2,7 @@ package com.gmail.andreyzarazka.servlets;
 
 import com.gmail.andreyzarazka.dao.ExceptionDAO;
 import com.gmail.andreyzarazka.dao.FactoryDAO;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 
 public class AdminLogInServlet extends HttpServlet {
     private static final long serialVersionUID = 2548391078153765170L;
+    private static Logger log = Logger.getLogger(AdminLogInServlet.class.getName());
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
     private int role = 0;
@@ -32,17 +34,13 @@ public class AdminLogInServlet extends HttpServlet {
             } else if (role == 1) {
                 response.sendRedirect("/admin-page");
             } else if (role == 2) {
-                response.sendRedirect("/admin-page");
+                response.sendRedirect("/moderator-page");
             } else if (role == 3) {
                 response.sendRedirect("/meloman");
             }
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     private String searchUser(String login, String password) {
@@ -65,7 +63,7 @@ public class AdminLogInServlet extends HttpServlet {
                 }
             }
         } catch (SQLException | ExceptionDAO e) {
-            e.printStackTrace();
+            log.error("I can't find user with the specified login".concat(login), e);
         }
         return firstName;
     }

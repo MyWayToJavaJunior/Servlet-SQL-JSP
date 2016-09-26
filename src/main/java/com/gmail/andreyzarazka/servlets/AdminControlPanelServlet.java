@@ -4,6 +4,7 @@ import com.gmail.andreyzarazka.dao.*;
 import com.gmail.andreyzarazka.domain.Address;
 import com.gmail.andreyzarazka.domain.MusicType;
 import com.gmail.andreyzarazka.domain.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class AdminControlPanelServlet extends HttpServlet {
     private static final long serialVersionUID = -582494122275711814L;
+    private static Logger log = Logger.getLogger(AdminControlPanelServlet.class.getName());
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
 
@@ -32,9 +34,9 @@ public class AdminControlPanelServlet extends HttpServlet {
             List<MusicType> musicTypes = musicTypeDAO.getAll();
             request.setAttribute("musicTypes", musicTypes);
 
-            request.getRequestDispatcher("pages/controlPanel.jsp").forward(request, response);
-        } catch (ExceptionDAO exceptionDAO) {
-            exceptionDAO.printStackTrace();
+        } catch (ExceptionDAO e) {
+            log.error("Cannot read", e);
         }
+        request.getRequestDispatcher("pages/controlPanel.jsp").forward(request, response);
     }
 }

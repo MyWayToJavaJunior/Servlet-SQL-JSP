@@ -5,6 +5,7 @@ import com.gmail.andreyzarazka.domain.Address;
 import com.gmail.andreyzarazka.domain.MusicType;
 import com.gmail.andreyzarazka.domain.Role;
 import com.gmail.andreyzarazka.domain.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class AdminCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 7208599399177986204L;
+    private static Logger log = Logger.getLogger(AdminCreateServlet.class.getName());
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
 
@@ -39,7 +41,8 @@ public class AdminCreateServlet extends HttpServlet {
         String[] musicTypes = request.getParameterValues("listMusics");
 
         if (checkLogin(login)) {
-            request.setAttribute("login", "Login already used!");
+            log.error("A user with this login already registered on this site");
+            doGet(request, response);
         }
 
         user.setLogin(login);
@@ -57,8 +60,8 @@ public class AdminCreateServlet extends HttpServlet {
             List<MusicType> setMusicTypes = null;
             try {
                 setMusicTypes = factoryDAO.getMusicTypeDAO().getAll();
-            } catch (ExceptionDAO exceptionDAO) {
-                exceptionDAO.printStackTrace();
+            } catch (ExceptionDAO e) {
+                log.error("Cannot read list musics", e);
             }
             Iterator<MusicType> iterator = setMusicTypes.iterator();
             while (iterator.hasNext()) {
@@ -74,10 +77,10 @@ public class AdminCreateServlet extends HttpServlet {
         try {
             UserDAO userDAO = factoryDAO.getUserDAO();
             userDAO.add(user);
-            response.sendRedirect("/admin-panel");
-        } catch (ExceptionDAO exceptionDAO) {
-            exceptionDAO.printStackTrace();
+        } catch (ExceptionDAO e) {
+            log.error("Cannot create user", e);
         }
+        response.sendRedirect("/admin-panel");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,10 +93,10 @@ public class AdminCreateServlet extends HttpServlet {
             List<MusicType> musicTypes = musicTypeDAO.getAll();
             request.setAttribute("musicTypes", musicTypes);
 
-            request.getRequestDispatcher("pages/adminCreate.jsp").forward(request, response);
-        } catch (ExceptionDAO exceptionDAO) {
-            exceptionDAO.printStackTrace();
+        } catch (ExceptionDAO e) {
+            log.error("Cannot read roleDAO or musicTypeDAO", e);
         }
+        request.getRequestDispatcher("pages/adminCreate.jsp").forward(request, response);
     }
 
     private boolean checkLogin(String login) {
@@ -114,7 +117,7 @@ public class AdminCreateServlet extends HttpServlet {
                 }
             }
         } catch (SQLException | ExceptionDAO e) {
-            e.printStackTrace();
+            log.error("I can't find user with the specified login" + login, e);
         }
         return used;
     }
