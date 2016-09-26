@@ -26,11 +26,11 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "SELECT id, login, password, first_name, last_name, age FROM meloman_db.users";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getAll(): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getAll(): Create PreparedStatement");
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getAll(): Get ResultSet");
 
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -44,32 +44,32 @@ public class UserDBQueryDAO implements UserDAO {
                 users.add(user);
             }
         } catch (SQLException e) {
-            log.error("Cannot read users\n", e);
+            log.error("Method getAll(): Cannot read users\n", e);
             throw new ExceptionDAO("Cannot read users", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getAll(): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getAll(): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getAll(): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getAll(): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getAll(): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getAll(): Cannot close Connection\n", e);
             }
         }
         return users;
@@ -85,11 +85,11 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "SELECT * FROM meloman_db.users";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getAllFullUsers(): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getAllFullUsers(): Create PreparedStatement");
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getAllFullUsers(): Get ResultSet");
 
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -107,32 +107,32 @@ public class UserDBQueryDAO implements UserDAO {
                 fullUsers.add(fullUser);
             }
         } catch (SQLException e) {
-            log.error("Cannot read full users\n", e);
+            log.error("Method getAllFullUsers(): Cannot read full users\n", e);
             throw new ExceptionDAO("Cannot read full users", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getAllFullUsers(): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getAllFullUsers(): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getAllFullUsers(): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getAllFullUsers(): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getAllFullUsers(): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getAllFullUsers(): Cannot close Connection\n", e);
             }
         }
         return fullUsers;
@@ -147,12 +147,12 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "SELECT id, login, password, first_name, last_name, age FROM meloman_db.users WHERE id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getById(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getById(int id): Create PreparedStatement");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getById(int id): Get ResultSet");
 
             while (resultSet.next()) {
                 String login = resultSet.getString(2);
@@ -164,32 +164,32 @@ public class UserDBQueryDAO implements UserDAO {
                 user = new User(id, login, password, firstName, lastName, age);
             }
         } catch (SQLException e) {
-            log.error("I cannot get the user with the specified " + id + "\n ", e);
+            log.error("Method getById(int id): I cannot get the user with the specified " + id + "\n ", e);
             throw new ExceptionDAO("I cannot get the user with the specified " + id + " ", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getById(int id): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getById(int id): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getById(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getById(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getById(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getById(int id): Cannot close Connection\n", e);
             }
         }
         return user;
@@ -204,12 +204,12 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "SELECT * FROM meloman_db.users WHERE id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getByFullUserId(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getByFullUserId(int id): Create PreparedStatement");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getByFullUserId(int id): Get ResultSet");
 
             while (resultSet.next()) {
                 String login = resultSet.getString(2);
@@ -225,32 +225,32 @@ public class UserDBQueryDAO implements UserDAO {
                 fullUser.setMusicTypes(getUsersHasMusicType(id));
             }
         } catch (SQLException e) {
-            log.error("I cannot get the user with the specified " + id + "\n ", e);
+            log.error("Method getByFullUserId(int id): I cannot get the full user with the specified " + id + "\n ", e);
             throw new ExceptionDAO("I cannot get the user with the specified " + id + " ", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getByFullUserId(int id): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getByFullUserId(int id): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getByFullUserId(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getByFullUserId(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getByFullUserId(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getByFullUserId(int id): Cannot close Connection\n", e);
             }
         }
         return fullUser;
@@ -265,9 +265,9 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "INSERT INTO meloman_db.users (`login`, `password`, `first_name`, `last_name`, `age`, `role_id`) VALUES (?, ?, ?, ?, ?, ?)";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method add(User user): Open Connection");
             statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            log.trace("Create PreparedStatement");
+            log.trace("Method add(User user): Create PreparedStatement");
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
@@ -277,7 +277,7 @@ public class UserDBQueryDAO implements UserDAO {
             statement.executeUpdate();
 
             resultSet = statement.getGeneratedKeys();
-            log.trace("Get ResultSet");
+            log.trace("Method add(User user): Get ResultSet");
             resultSet.next();
             int userId = resultSet.getInt(1);
             user.setId(userId);
@@ -289,33 +289,34 @@ public class UserDBQueryDAO implements UserDAO {
             if (user.getMusicTypes() != null) {
                 createUsersHasMusicType(user.getMusicTypes(), user.getId());
             }
+            log.trace("Method add(User user): Create user" + user.getLogin());
         } catch (SQLException e) {
-            log.error("Cannot create user\n", e);
+            log.error("Method add(User user): Cannot create user\n", e);
             throw new ExceptionDAO("Cannot create user", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method add(User user): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method add(User user): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method add(User user): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method add(User user): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method add(User user): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method add(User user): Cannot close Connection\n", e);
             }
         }
         return current;
@@ -326,13 +327,12 @@ public class UserDBQueryDAO implements UserDAO {
         boolean current = false;
         Connection connection = null;
         PreparedStatement statement = null;
-        int id = user.getId();
         try {
-            String sql = "UPDATE meloman_db.users SET login = ?, password = ?, first_name = ?, last_name = ?, age = ?, role_id = ? WHERE id = `" + id + "`";
+            String sql = "UPDATE meloman_db.users SET login = ?, password = ?, first_name = ?, last_name = ?, age = ?, role_id = ? WHERE id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method update(User user): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method update(User user): Create PreparedStatement");
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
@@ -345,26 +345,32 @@ public class UserDBQueryDAO implements UserDAO {
             if (statement.executeUpdate() == 1) {
                 current = true;
             }
+
             factoryDAO.getAddressDAO().updateAddress(user.getAddress(), user.getId());
+            deleteUsersHasMusicType(user.getId());
+            if (user.getMusicTypes() != null) {
+                createUsersHasMusicType(user.getMusicTypes(), user.getId());
+            }
+            log.trace("Method update(User user): Update user");
         } catch (SQLException e) {
-            log.error("Cannot update user\n", e);
+            log.error("Method update(User user): Cannot update user\n", e);
             throw new ExceptionDAO("Cannot update user", e);
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method update(User user): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method update(User user): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method update(User user): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method update(User user): Cannot close Connection\n", e);
             }
         }
         return current;
@@ -378,35 +384,35 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "DELETE FROM meloman_db.users WHERE id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method delete(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method delete(int id): Create PreparedStatement");
             statement.setInt(1, id);
-
-            if (statement.executeUpdate() >= 1) {
+            if (statement.executeUpdate() == 1) {
                 factoryDAO.getAddressDAO().delete(id);
                 deleteUsersHasMusicType(id);
                 current = true;
             }
+            log.trace("Method delete(int id): User delete");
         } catch (SQLException e) {
-            log.error("I cannot get the user with the specified " + id + "\n ", e);
-            throw new ExceptionDAO("I cannot get the user with the specified " + id + " ", e);
+            log.error("Method delete(int id): I cannot delete user with the id = " + id + "\n ", e);
+            throw new ExceptionDAO("I cannot delete user with the id = " + id + " ", e);
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method delete(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method delete(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method delete(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method delete(int id): Cannot close Connection\n", e);
             }
         }
         return current;
@@ -420,31 +426,32 @@ public class UserDBQueryDAO implements UserDAO {
             try {
                 String sql = "INSERT INTO meloman_db.users_has_music_type (`users_id`, `music_type_id`) VALUES (?, ?)";
                 connection = factoryDAO.getConnection();
-                log.trace("Open Connection");
+                log.trace("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Open Connection");
                 statement = connection.prepareStatement(sql);
-                log.trace("Create PreparedStatement");
+                log.trace("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Create PreparedStatement");
                 statement.setInt(1, id);
                 statement.setInt(2, musicType.getId());
                 statement.executeUpdate();
+                log.trace("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Create UsersHasMusicType");
             } catch (SQLException e) {
-                log.error("Cannot create UsersHasMusicType\n", e);
+                log.error("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Cannot create UsersHasMusicType\n", e);
                 throw new ExceptionDAO("Cannot create UsersHasMusicType", e);
             } finally {
                 try {
                     if (statement != null) {
                         statement.close();
-                        log.trace("PreparedStatement closed");
+                        log.trace("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): PreparedStatement closed");
                     }
                 } catch (SQLException e) {
-                    log.error("Cannot close PreparedStatement\n", e);
+                    log.error("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Cannot close PreparedStatement\n", e);
                 }
                 try {
                     if (connection != null) {
                         connection.close();
-                        log.trace("Connection closed");
+                        log.trace("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Connection closed");
                     }
                 } catch (SQLException e) {
-                    log.error("Cannot close Connection\n", e);
+                    log.error("Method createUsersHasMusicType(List<MusicType> musicTypes, int id): Cannot close Connection\n", e);
                 }
             }
         }
@@ -458,44 +465,45 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "SELECT * FROM meloman_db.users_has_music_type WHERE users_id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getUsersHasMusicType(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getUsersHasMusicType(int id): Create PreparedStatement");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getUsersHasMusicType(int id): Get ResultSet");
 
             while (resultSet.next()) {
                 int musicTypeId = resultSet.getInt(2);
                 musicTypes.add(factoryDAO.getMusicTypeDAO().getById(musicTypeId));
             }
+            log.trace("Method getUsersHasMusicType(int id): Found UsersHasMusicType with the id " + id);
         } catch (SQLException e) {
-            log.error("I cannot get the UsersHasMusicType with the specified " + id + "\n ", e);
-            throw new ExceptionDAO("I cannot get the UsersHasMusicType with the specified " + id + " ", e);
+            log.error("Method getUsersHasMusicType(int id): I cannot get the UsersHasMusicType with the id " + id + "\n ", e);
+            throw new ExceptionDAO("I cannot get the UsersHasMusicType with the id " + id + " ", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getUsersHasMusicType(int id): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getUsersHasMusicType(int id): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getUsersHasMusicType(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getUsersHasMusicType(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getUsersHasMusicType(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getUsersHasMusicType(int id): Cannot close Connection\n", e);
             }
         }
         return musicTypes;
@@ -507,30 +515,31 @@ public class UserDBQueryDAO implements UserDAO {
         try {
             String sql = "DELETE FROM meloman_db.users_has_music_type WHERE users_id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method deleteUsersHasMusicType(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method deleteUsersHasMusicType(int id): Create PreparedStatement");
             statement.setInt(1, id);
             statement.executeUpdate();
+            log.error("Method deleteUsersHasMusicType(int id): Delete UsersHasMusicType");
         } catch (SQLException e) {
-            log.error("Cannot delete UsersHasMusicType\n", e);
+            log.error("Method deleteUsersHasMusicType(int id): Cannot delete UsersHasMusicType\n", e);
             throw new ExceptionDAO("Cannot delete UsersHasMusicType", e);
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method deleteUsersHasMusicType(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method deleteUsersHasMusicType(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method deleteUsersHasMusicType(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method deleteUsersHasMusicType(int id): Cannot close Connection\n", e);
             }
         }
     }

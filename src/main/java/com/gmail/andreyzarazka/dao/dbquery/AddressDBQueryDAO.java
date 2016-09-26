@@ -160,7 +160,7 @@ public class AddressDBQueryDAO implements AddressDAO {
             statement = connection.prepareStatement(sql);
             log.trace("Create PreparedStatement");
             statement.setInt(1, id);
-            if (statement.executeUpdate() >= 1) {
+            if (statement.executeUpdate() == 1) {
                 current = true;
             }
         } catch (SQLException e) {
@@ -238,9 +238,14 @@ public class AddressDBQueryDAO implements AddressDAO {
             statement = connection.prepareStatement(sql);
             log.trace("Create PreparedStatement");
             statement.setString(1, address.getCountry());
-            statement.setString(2, address.getStreet());
+            statement.setString(2, address.getStreet());;
             statement.setInt(3, address.getZipCode());
-            statement.setInt(4, address.getId());
+            statement.setInt(4, id);
+            statement.executeUpdate();
+
+            if (statement.executeUpdate() == 1) {
+                current = true;
+            }
         } catch (SQLException e) {
             log.error("Cannot update address\n", e);
             throw new ExceptionDAO("Cannot update address", e);

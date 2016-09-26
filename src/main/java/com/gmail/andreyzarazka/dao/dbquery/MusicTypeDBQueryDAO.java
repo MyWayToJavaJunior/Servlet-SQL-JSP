@@ -180,7 +180,7 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
             statement = connection.prepareStatement(sql);
             log.trace("Create PreparedStatement");
             statement.setString(1, model.getMusicTypeName());
-            if (statement.executeUpdate() >= 1) {
+            if (statement.executeUpdate() == 1) {
                 current = true;
             }
         } catch (SQLException e) {

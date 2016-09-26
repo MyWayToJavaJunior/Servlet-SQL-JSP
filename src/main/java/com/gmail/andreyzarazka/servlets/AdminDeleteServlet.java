@@ -27,6 +27,7 @@ public class AdminDeleteServlet extends HttpServlet {
         try {
             UserDAO userDAO = factoryDAO.getUserDAO();
             int id = Integer.parseInt(mass.nextElement());
+            System.out.println("servlet user id" + id);
             userDAO.delete(id);
             response.sendRedirect("/admin-panel");
         } catch (ExceptionDAO exceptionDAO) {
