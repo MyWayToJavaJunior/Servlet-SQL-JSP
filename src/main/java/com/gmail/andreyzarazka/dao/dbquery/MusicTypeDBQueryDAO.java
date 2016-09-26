@@ -27,13 +27,13 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "SELECT * FROM meloman_db.music_type;";
+            String sql = "SELECT * FROM meloman_db.music_type";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getAll(): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getAll(): Create PreparedStatement");
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getAll(): Get ResultSet");
 
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -45,32 +45,32 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
                 musicTypes.add(musicType);
             }
         } catch (SQLException e) {
-            log.error("Cannot read MusicType\n", e);
+            log.error("Method getAll(): Cannot read MusicType\n", e);
             throw new ExceptionDAO("Cannot read MusicType", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getAll(): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getAll(): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getAll(): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getAll(): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getAll(): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getAll(): Cannot close Connection\n", e);
             }
         }
         return musicTypes;
@@ -85,47 +85,46 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
         try {
             String sql = "SELECT * FROM meloman_db.music_type where id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method getById(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method getById(int id): Create PreparedStatement");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            log.trace("Get ResultSet");
+            log.trace("Method getById(int id): Get ResultSet");
 
             while (resultSet.next()) {
                 String musicTypeName = resultSet.getString(2);
                 musicType = new MusicType();
                 musicType.setId(id);
                 musicType.setMusicTypeName(musicTypeName);
-
             }
         } catch (SQLException e) {
-            log.error("I cannot get the MusicType with the specified " + id + "\n ", e);
-            throw new ExceptionDAO("I cannot get the MusicType with the specified " + id + " ", e);
+            log.error("Method getById(int id): I cannot get the MusicType with the id " + id + "\n ", e);
+            throw new ExceptionDAO("I cannot get the MusicType with the id " + id + " ", e);
         } finally {
             try {
                 if (resultSet != null) {
                     resultSet.close();
-                    log.trace("ResultSet closed");
+                    log.trace("Method getById(int id): ResultSet closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close ResultSet\n", e);
+                log.error("Method getById(int id): Cannot close ResultSet\n", e);
             }
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method getById(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method getById(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method getById(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method getById(int id): Cannot close Connection\n", e);
             }
             return musicType;
         }
@@ -137,32 +136,34 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            String sql = "INSERT INTO meloman_db.music_type (`type_name`) VALUES (?);";
+            String sql = "INSERT INTO meloman_db.music_type (`type_name`) VALUES (?)";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method add(MusicType model): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method add(MusicType model): Create PreparedStatement");
             statement.setString(1, model.getMusicTypeName());
             statement.executeUpdate();
+            log.trace("Method add(MusicType model): Create MusicType");
+            current = true;
         } catch (SQLException e) {
-            log.error("Cannot create MusicType\n", e);
-            throw new ExceptionDAO("Cannot create MusicType", e);
+            log.error("Method add(MusicType model): Cannot create MusicType\n", e);
+            throw new ExceptionDAO("Method add(MusicType model): Cannot create MusicType", e);
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method add(MusicType model): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method add(MusicType model): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method add(MusicType model): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method add(MusicType model): Cannot close Connection\n", e);
             }
         }
         return current;
@@ -176,32 +177,32 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
         try {
             String sql = "UPDATE meloman_db.music_type SET type_name = ? WHERE id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method update(MusicType model): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method update(MusicType model): Create PreparedStatement");
             statement.setString(1, model.getMusicTypeName());
-            if (statement.executeUpdate() == 1) {
-                current = true;
-            }
+            statement.executeUpdate();
+            log.error("Method update(MusicType model): Update MusicType");
+            current = true;
         } catch (SQLException e) {
-            log.error("Cannot update MusicType\n", e);
+            log.error("Method update(MusicType model): Cannot update MusicType\n", e);
             throw new ExceptionDAO("Cannot update MusicType", e);
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method update(MusicType model): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method update(MusicType model): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method update(MusicType model): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method update(MusicType model): Cannot close Connection\n", e);
             }
         }
         return current;
@@ -213,34 +214,34 @@ public class MusicTypeDBQueryDAO implements MusicTypeDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            String sql = "DELETE FROM meloman_db.users WHERE id = ?";
+            String sql = "DELETE FROM meloman_db.music_type WHERE id = ?";
             connection = factoryDAO.getConnection();
-            log.trace("Open Connection");
+            log.trace("Method delete(int id): Open Connection");
             statement = connection.prepareStatement(sql);
-            log.trace("Create PreparedStatement");
+            log.trace("Method delete(int id): Create PreparedStatement");
             statement.setInt(1, id);
-            if (statement.executeUpdate() >= 1) {
-                current = true;
-            }
+            statement.executeUpdate();
+            log.trace("Method delete(int id): Delete MusicType");
+            current = true;
         } catch (SQLException e) {
-            log.error("I cannot get the MusicType with the specified " + id + "\n ", e);
-            throw new ExceptionDAO("I cannot get the MusicType with the specified " + id + " ", e);
+            log.error("Method delete(int id): I cannot get the MusicType with the id " + id + "\n ", e);
+            throw new ExceptionDAO("I cannot get the MusicType with the id " + id + " ", e);
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
-                    log.trace("PreparedStatement closed");
+                    log.trace("Method delete(int id): PreparedStatement closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close PreparedStatement\n", e);
+                log.error("Method delete(int id): Cannot close PreparedStatement\n", e);
             }
             try {
                 if (connection != null) {
                     connection.close();
-                    log.trace("Connection closed");
+                    log.trace("Method delete(int id): Connection closed");
                 }
             } catch (SQLException e) {
-                log.error("Cannot close Connection\n", e);
+                log.error("Method delete(int id): Cannot close Connection\n", e);
             }
         }
         return current;

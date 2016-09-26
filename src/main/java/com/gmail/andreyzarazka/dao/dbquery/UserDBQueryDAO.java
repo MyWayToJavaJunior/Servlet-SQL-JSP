@@ -284,12 +284,13 @@ public class UserDBQueryDAO implements UserDAO {
 
             Address address = user.getAddress();
             address.setId(userId);
-            factoryDAO.getAddressDAO().createAddress(address, user.getId());
+            factoryDAO.getAddressDAO().add(address);
 
             if (user.getMusicTypes() != null) {
                 createUsersHasMusicType(user.getMusicTypes(), user.getId());
             }
             log.trace("Method add(User user): Create user" + user.getLogin());
+            current = true;
         } catch (SQLException e) {
             log.error("Method add(User user): Cannot create user\n", e);
             throw new ExceptionDAO("Cannot create user", e);
@@ -342,16 +343,15 @@ public class UserDBQueryDAO implements UserDAO {
             statement.setInt(7, user.getId());
             statement.executeUpdate();
 
-            if (statement.executeUpdate() == 1) {
-                current = true;
-            }
-
-            factoryDAO.getAddressDAO().updateAddress(user.getAddress(), user.getId());
+            Address address = user.getAddress();
+            address.setId(user.getId());
+            factoryDAO.getAddressDAO().update(address);
             deleteUsersHasMusicType(user.getId());
             if (user.getMusicTypes() != null) {
                 createUsersHasMusicType(user.getMusicTypes(), user.getId());
             }
             log.trace("Method update(User user): Update user");
+            current = true;
         } catch (SQLException e) {
             log.error("Method update(User user): Cannot update user\n", e);
             throw new ExceptionDAO("Cannot update user", e);
@@ -388,12 +388,12 @@ public class UserDBQueryDAO implements UserDAO {
             statement = connection.prepareStatement(sql);
             log.trace("Method delete(int id): Create PreparedStatement");
             statement.setInt(1, id);
-            if (statement.executeUpdate() == 1) {
-                factoryDAO.getAddressDAO().delete(id);
-                deleteUsersHasMusicType(id);
-                current = true;
-            }
+
+            factoryDAO.getAddressDAO().delete(id);
+            deleteUsersHasMusicType(id);
+            statement.executeUpdate();
             log.trace("Method delete(int id): User delete");
+            current = true;
         } catch (SQLException e) {
             log.error("Method delete(int id): I cannot delete user with the id = " + id + "\n ", e);
             throw new ExceptionDAO("I cannot delete user with the id = " + id + " ", e);

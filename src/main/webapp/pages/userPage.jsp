@@ -119,7 +119,7 @@
                         </div>
                         <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
-                            <img src="/img/mloman_db.png">
+                            <img class="img-responsive" alt="Диаграмма классов MySQL" src="/img/mloman_db.png">
                         </div>
                         <!-- /.col-lg-6 -->
                     </div>
