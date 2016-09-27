@@ -226,18 +226,6 @@
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-<!-- Morris Charts JavaScript -->
-<script src="../vendor/raphael/raphael.min.js"></script>
-<script src="../vendor/morrisjs/morris.min.js"></script>
-<script src="../data/morris-data.js"></script>
-<!-- Flot Charts JavaScript -->
-<script src="../vendor/flot/excanvas.min.js"></script>
-<script src="../vendor/flot/jquery.flot.js"></script>
-<script src="../vendor/flot/jquery.flot.pie.js"></script>
-<script src="../vendor/flot/jquery.flot.resize.js"></script>
-<script src="../vendor/flot/jquery.flot.time.js"></script>
-<script src="../vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-<script src="../data/flot-data.js"></script>
 <!-- DataTables JavaScript -->
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
