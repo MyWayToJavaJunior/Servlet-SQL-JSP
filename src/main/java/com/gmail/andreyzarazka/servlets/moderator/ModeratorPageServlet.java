@@ -23,10 +23,6 @@ public class ModeratorPageServlet extends HttpServlet {
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {

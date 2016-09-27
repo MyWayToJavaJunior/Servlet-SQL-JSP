@@ -21,7 +21,6 @@ public class AdminStartServlet extends HttpServlet {
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             UserDAO userDAO = factoryDAO.getUserDAO();
             List<User> users = userDAO.getAllFullUsers();

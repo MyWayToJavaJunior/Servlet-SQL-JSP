@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ModeratorPanelServlet extends HttpServlet {
     private static final long serialVersionUID = -3735236899509840026L;
-    private static Logger log = Logger.getLogger(AdminControlPanelServlet.class.getName());
+    private static Logger log = Logger.getLogger(ModeratorPanelServlet.class.getName());
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
 

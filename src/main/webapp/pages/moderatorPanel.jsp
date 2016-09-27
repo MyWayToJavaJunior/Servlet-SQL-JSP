@@ -132,7 +132,7 @@
                                             ${musicType.musicTypeName}
                                         </c:forEach>
                                     </td>
-                                    <form action="/admin-edit" method="GET">
+                                    <form action="/moderator-edit" method="GET">
                                         <td class="text-center">
                                             <button type="submit" title="Edit user" class="btn btn-primary btn-xs"
                                                     name="${user.getId()}">

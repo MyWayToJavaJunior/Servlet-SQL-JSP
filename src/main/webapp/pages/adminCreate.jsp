@@ -48,7 +48,6 @@
 
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <c:out value="${user.firstName}" default="Unknown" escapeXml="true"/>
                 admin
             </li>
             <li class="dropdown">

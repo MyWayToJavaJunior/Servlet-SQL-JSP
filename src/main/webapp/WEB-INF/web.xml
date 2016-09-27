@@ -9,6 +9,15 @@
     <display-name>Archetype Created Web Application</display-name>
 
     <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>com.gmail.andreyzarazka.servlets.SignUpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/singUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AdminLogInServlet</servlet-name>
         <servlet-class>com.gmail.andreyzarazka.servlets.AdminLogInServlet</servlet-class>
     </servlet>
@@ -73,7 +82,7 @@
 
     <servlet>
         <servlet-name>ModeratorPanelServlet</servlet-name>
-        <servlet-class>com.gmail.andreyzarazka.servlets.moderator.ModeratorPageServlet</servlet-class>
+        <servlet-class>com.gmail.andreyzarazka.servlets.moderator.ModeratorPanelServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ModeratorPanelServlet</servlet-name>

@@ -44,7 +44,6 @@
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li>
-                <c:out value="${user.firstName}" default="Unknown" escapeXml="true" />
                 user
             </li>
             <li class="dropdown">

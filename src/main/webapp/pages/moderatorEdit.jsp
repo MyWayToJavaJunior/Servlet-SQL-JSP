@@ -21,7 +21,6 @@
     <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -42,13 +41,13 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/admin-page">Meloman Admin</a>
+            <a class="navbar-brand" href="/moderator-page">Meloman Admin</a>
         </div>
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                admin
+                moderator
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -68,10 +67,10 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="/admin-page"><i class="fa fa-info-circle" aria-hidden="true"></i> Info</a>
+                        <a href="/moderator-page"><i class="fa fa-info-circle" aria-hidden="true"></i> Info</a>
                     </li>
                     <li>
-                        <a href="/admin-panel"><i class="fa fa-tachometer" aria-hidden="true"></i></i> Control panel</a>
+                        <a href="/moderator-panel"><i class="fa fa-tachometer" aria-hidden="true"></i></i> Control panel</a>
                     </li>
                 </ul>
             </div>
@@ -94,7 +93,7 @@
                         <i class="fa fa-pencil-square-o"></i> Edit user
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" action="/admin-edit" method="post" role="form">
+                        <form class="form-horizontal" action="/moderator-edit" method="post" role="form">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="panel-heading">
@@ -230,7 +229,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-11 col-sm-1">
-                                        <button type="submit" class="btn btn-primary" name="add">
+                                        <button type="submit" class="btn btn-primary" name="addEdit">
                                             <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
                                         </button>
                                     </div>

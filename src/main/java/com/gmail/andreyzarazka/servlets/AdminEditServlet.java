@@ -26,6 +26,8 @@ public class AdminEditServlet extends HttpServlet {
     private int id;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         User user = new User();
         Address addressUser = new Address();
 
@@ -80,6 +82,8 @@ public class AdminEditServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         Enumeration<String> mass = request.getParameterNames();
         id = Integer.parseInt(mass.nextElement());
         try {

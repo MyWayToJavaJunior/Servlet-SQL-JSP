@@ -38,9 +38,16 @@ public class AdminLogInServlet extends HttpServlet {
             } else if (role == 3) {
                 response.sendRedirect("/meloman");
             }
+        } else if (request.getParameter("singUpBtn") != null) {
+            doGet(request, response);
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("/singUp");
     }
 
     private String searchUser(String login, String password) {

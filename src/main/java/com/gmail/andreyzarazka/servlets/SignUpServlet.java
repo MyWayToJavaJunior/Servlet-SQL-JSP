@@ -8,6 +8,7 @@ import com.gmail.andreyzarazka.domain.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +20,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
-public class AdminCreateServlet extends HttpServlet {
-    private static final long serialVersionUID = 7208599399177986204L;
+public class SignUpServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(AdminCreateServlet.class.getName());
 
     private FactoryDAO factoryDAO = FactoryDAO.getInstance();
@@ -30,13 +30,13 @@ public class AdminCreateServlet extends HttpServlet {
 
         User user = new User();
         Address addressUser = new Address();
+        int userRole = 3;
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String age = request.getParameter("age");
-        String role = request.getParameter("userRole");
         String country = request.getParameter("country");
         String street = request.getParameter("street");
         String zipCode = request.getParameter("zipCode");
@@ -52,7 +52,7 @@ public class AdminCreateServlet extends HttpServlet {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAge(Integer.parseInt(age));
-        user.setRoleId(Integer.parseInt(role));
+        user.setRoleId(userRole);
         addressUser.setCountry(country);
         addressUser.setStreet(street);
         addressUser.setZipCode(Integer.parseInt(zipCode));
@@ -82,16 +82,12 @@ public class AdminCreateServlet extends HttpServlet {
         } catch (ExceptionDAO e) {
             log.error("Cannot create user", e);
         }
-        response.sendRedirect("/admin-panel");
+        response.sendRedirect("/meloman");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try {
-            RoleDAO roleDAO = factoryDAO.getRoleDAO();
-            List<Role> roles = roleDAO.getAll();
-            request.setAttribute("roles", roles);
-
             MusicTypeDAO musicTypeDAO = factoryDAO.getMusicTypeDAO();
             List<MusicType> musicTypes = musicTypeDAO.getAll();
             request.setAttribute("musicTypes", musicTypes);
@@ -99,7 +95,7 @@ public class AdminCreateServlet extends HttpServlet {
         } catch (ExceptionDAO e) {
             log.error("Cannot read roleDAO or musicTypeDAO", e);
         }
-        request.getRequestDispatcher("pages/adminCreate.jsp").forward(request, response);
+        request.getRequestDispatcher("pages/signUp.jsp").forward(request, response);
     }
 
     private boolean checkLogin(String login) {

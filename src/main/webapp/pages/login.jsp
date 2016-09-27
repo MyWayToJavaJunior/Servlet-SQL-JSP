@@ -44,9 +44,19 @@
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password">
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-lg btn-success btn-block" name="logInBtn">Login
-                                </button>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-sm btn-success btn-block" name="logInBtn">Sign
+                                        In
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-sm btn-success btn-block" name="singUpBtn">Sign
+                                        Up
+                                    </button>
+                                </div>
                             </div>
                         </fieldset>
                     </form>
@@ -55,7 +65,6 @@
         </div>
     </div>
 </div>
-
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
