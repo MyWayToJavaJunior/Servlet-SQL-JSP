@@ -139,7 +139,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe>
+                            <iframe class="embed-responsive-item" src="../video/video_review.mp4"></iframe>
                         </div>
                     </div>
                     <!-- /.panel-body -->
